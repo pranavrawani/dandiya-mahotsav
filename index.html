@@ -701,27 +701,15 @@
     }, 1000);
     // --- QR Click: Download + UPI Intent ---
     function handleQRClick() {
-      // Step 1: Trigger the QR Image Download
-      const link = document.createElement('a');
-      link.href = './QR RBR_.jpeg';
-      link.download = 'Dandiya_Payment_QR.jpeg';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+    const upiID = "pkhokya@slc";
+    const payeeName = "Mr Pranav Kumar Rawani";
+    
+    // Format the UPI Deep Link
+    const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&cu=INR`;
 
-      // Step 2: Trigger the UPI App Pop-up (PhonePe, GPay, etc.)
-      // REPLACE "YOUR_UPI_ID_HERE" WITH THE ACTUAL UPI ID
-      const upiID = "pkhokya@slc";
-      const payeeName = "Mr Pranav Kumar Rawani";
-
-      // Format the UPI Deep Link
-      const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&cu=INR`;
-
-      // Wait half a second to ensure download starts, then open apps
-      setTimeout(() => {
-        window.location.href = upiLink;
-      }, 500);
-    }
+    // Open the UPI App (PhonePe, GPay, Paytm, etc.)
+    window.location.href = upiLink;
+}
   </script>
 </body>
 </html>
