@@ -701,20 +701,20 @@
     }, 1000);
     // --- QR Click: Download + UPI Intent ---
     function handleQRClick() {
-    // Step 1: Download the QR Code to the phone's gallery
+    // Step 1: Download the QR Code image to the phone's gallery
     const link = document.createElement('a');
-    link.href = './QR RBR_.jpeg'; // Ensure this exactly matches your file name
+    link.href = './QR RBR_.jpeg'; 
     link.download = 'Dandiya_Payment_QR.jpeg';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 
-    // Step 2: Format the UPI link to open the payment app
+    // Step 2: Open the UPI App directly to the payment screen
     const upiID = "pkhokya@slc";
     const payeeName = "Mr Pranav Kumar Rawani";
     const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&cu=INR`;
 
-    // Step 3: Wait 800 milliseconds for the download to start, then open the UPI app
+    // Wait 800 milliseconds for the download to trigger, then open the app
     setTimeout(() => {
         window.location.href = upiLink;
     }, 800);
