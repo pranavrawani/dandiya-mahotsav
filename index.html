@@ -701,14 +701,23 @@
     }, 1000);
     // --- QR Click: Download + UPI Intent ---
     function handleQRClick() {
+    // Step 1: Download the QR Code to the phone's gallery
+    const link = document.createElement('a');
+    link.href = './QR RBR_.jpeg'; // Ensure this exactly matches your file name
+    link.download = 'Dandiya_Payment_QR.jpeg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Step 2: Format the UPI link to open the payment app
     const upiID = "pkhokya@slc";
     const payeeName = "Mr Pranav Kumar Rawani";
-    
-    // Format the UPI Deep Link
     const upiLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&cu=INR`;
 
-    // Open the UPI App (PhonePe, GPay, Paytm, etc.)
-    window.location.href = upiLink;
+    // Step 3: Wait 800 milliseconds for the download to start, then open the UPI app
+    setTimeout(() => {
+        window.location.href = upiLink;
+    }, 800);
 }
   </script>
 </body>
