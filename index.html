@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dandiya Mahotsav 2026 | RBR Pathshala</title>
+    
+    <!-- Google Fonts: Playfair Display for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        festive: {
+                            red: '#8b0000',
+                            maroon: '#5c0000',
+                            orange: '#ff8c00',
+                            gold: '#ffd700',
+                            light: '#fff9f0',
+                            dark: '#222222'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fff9f0; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Playfair Display', serif; }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(139, 0, 0, 0.85), rgba(92, 0, 0, 0.9)), 
+                        url('https://images.unsplash.com/photo-1605808360022-77291a13fc61?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+        }
+
+        .gold-text-glow {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hide scrollbar for clean look but allow scrolling */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fff9f0; }
+        ::-webkit-scrollbar-thumb { background: #ff8c00; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8b0000; }
+    </style>
+</head>
+<body class="text-festive-dark antialiased flex flex-col min-h-screen">
+
+    <nav class="fixed w-full z-50 bg-festive-red/95 backdrop-blur-md shadow-lg border-b-2 border-festive-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo Space -->
+                <div class="flex-shrink-0 cursor-pointer" onclick="switchView('home-view')">
+                    <img src="https://placehold.co/180x60/fff9f0/8b0000?text=RBR+Pathshala+Logo" alt="RBR Pathshala Logo" class="h-12 rounded shadow-sm">
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <button onclick="switchView('home-view')" class="text-festive-light hover:text-festive-gold font-semibold transition-colors duration-200">Home</button>
+                    <button onclick="switchView('home-view'); setTimeout(()=>document.getElementById('booking').scrollIntoView(), 100)" class="text-festive-light hover:text-festive-gold font-semibold transition-colors duration-200">Book Pass</button>
+                    <button class="text-festive-light hover:text-festive-gold font-semibold transition-colors duration-200"><a href="https://www.rbrpathshala.com/about" target="_blank">About RBR Pathshala</a> </button>
+                    <button onclick="switchView('home-view'); setTimeout(()=>document.getElementById('booking').scrollIntoView(), 100)" class="bg-festive-gold text-festive-red px-6 py-2 rounded-full font-bold hover:bg-yellow-400 hover:scale-105 transition-all duration-200 shadow-md">Get Passes</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-festive-gold hover:text-white focus:outline-none text-2xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-festive-maroon border-t border-festive-gold/30">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col text-center">
+                <button onclick="switchView('home-view'); toggleMobileMenu()" class="block px-3 py-2 text-festive-light hover:text-festive-gold font-medium w-full">Home</button>
+                <button onclick="switchView('home-view'); setTimeout(()=>document.getElementById('booking').scrollIntoView(), 100); toggleMobileMenu()" class="block px-3 py-2 text-festive-light hover:text-festive-gold font-medium w-full">Book Pass</button>
+                <button onclick="switchView('about-view'); toggleMobileMenu()" class="block px-3 py-2 text-festive-light hover:text-festive-gold font-medium w-full">About RBR Pathshala</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-20">
+        
+        <!-- ======================================================= -->
+        <!-- HOME VIEW                                               -->
+        <!-- ======================================================= -->
+        <div id="home-view" class="fade-in block">
+            
+            <!-- Hero Section -->
+            <section class="hero-bg text-center py-24 md:py-32 px-4 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-festive-red/90 to-transparent"></div>
+                <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+                    <p class="text-festive-gold font-heading text-xl md:text-2xl mb-2 tracking-widest uppercase">RBR Pathshala Organises</p>
+                    <h1 class="text-5xl md:text-7xl font-heading font-black text-white mb-6 gold-text-glow leading-tight">
+                        Dandiya Mahotsav <span class="text-festive-gold">2026</span>
+                    </h1>
+                    <p class="text-lg md:text-2xl text-festive-light mb-10 font-light">The Biggest Dandiya Event of Dhanbad • Music • Dance • Masti</p>
+                    
+                    <!-- Countdown Timer -->
+                    <div class="glass-card rounded-2xl p-6 md:p-8 mb-10 shadow-2xl">
+                        <h3 class="text-festive-red font-bold text-xl mb-4">Event Starts In</h3>
+                        <div class="flex gap-4 md:gap-8 justify-center">
+                            <div class="flex flex-col items-center">
+                                <div id="days" class="text-3xl md:text-5xl font-black text-festive-orange w-16 h-16 md:w-24 md:h-24 bg-festive-red/10 rounded-xl flex items-center justify-center border-2 border-festive-orange">00</div>
+                                <span class="text-sm font-semibold mt-2 text-festive-dark uppercase">Days</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div id="hours" class="text-3xl md:text-5xl font-black text-festive-orange w-16 h-16 md:w-24 md:h-24 bg-festive-red/10 rounded-xl flex items-center justify-center border-2 border-festive-orange">00</div>
+                                <span class="text-sm font-semibold mt-2 text-festive-dark uppercase">Hours</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div id="minutes" class="text-3xl md:text-5xl font-black text-festive-orange w-16 h-16 md:w-24 md:h-24 bg-festive-red/10 rounded-xl flex items-center justify-center border-2 border-festive-orange">00</div>
+                                <span class="text-sm font-semibold mt-2 text-festive-dark uppercase">Mins</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div id="seconds" class="text-3xl md:text-5xl font-black text-festive-orange w-16 h-16 md:w-24 md:h-24 bg-festive-red/10 rounded-xl flex items-center justify-center border-2 border-festive-orange">00</div>
+                                <span class="text-sm font-semibold mt-2 text-festive-dark uppercase">Secs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="document.getElementById('booking').scrollIntoView()" class="bg-festive-orange text-white px-8 py-4 rounded-full font-bold text-xl md:text-2xl hover:bg-festive-gold hover:text-festive-red hover:-translate-y-1 transition-all duration-300 shadow-[0_0_20px_rgba(255,140,0,0.5)] border-2 border-transparent hover:border-festive-red">
+                        Book Your Passes Now
+                    </button>
+                </div>
+            </section>
+
+            <!-- Event Info Section -->
+            <section class="max-w-6xl mx-auto px-4 py-16 -mt-10 relative z-20">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 rounded-xl flex items-center gap-4 shadow-lg hover:-translate-y-1 transition-transform border-t-4 border-t-festive-red">
+                        <div class="w-16 h-16 rounded-full bg-festive-red/10 flex items-center justify-center text-festive-red text-2xl">
+                            <i class="far fa-calendar-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-festive-dark">Date</h3>
+                            <p class="text-gray-600">Thursday, 08 Oct 2026</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl flex items-center gap-4 shadow-lg hover:-translate-y-1 transition-transform border-t-4 border-t-festive-orange">
+                        <div class="w-16 h-16 rounded-full bg-festive-orange/10 flex items-center justify-center text-festive-orange text-2xl">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-festive-dark">Time</h3>
+                            <p class="text-gray-600">5:00 PM to 9:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl flex items-center gap-4 shadow-lg hover:-translate-y-1 transition-transform border-t-4 border-t-festive-gold">
+                        <div class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 text-2xl">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-festive-dark">Venue</h3>
+                            <p class="text-gray-600 text-sm">Hotel Shyamali & Events,<br>Nawadih, Dhanbad</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Highlights Section -->
+            <section class="bg-white py-16 px-4 border-y border-gray-200">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-4xl font-heading font-bold text-center text-festive-red mb-12">Event Highlights</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+                        <div class="p-4 flex flex-col items-center group">
+                            <div class="w-20 h-20 rounded-full bg-festive-light border-2 border-festive-orange flex items-center justify-center text-3xl text-festive-orange mb-4 group-hover:scale-110 group-hover:bg-festive-orange group-hover:text-white transition-all">
+                                <i class="fas fa-music"></i>
+                            </div>
+                            <h4 class="font-bold text-sm md:text-base">DJ Music</h4>
+                        </div>
+                        <div class="p-4 flex flex-col items-center group">
+                            <div class="w-20 h-20 rounded-full bg-festive-light border-2 border-festive-red flex items-center justify-center text-3xl text-festive-red mb-4 group-hover:scale-110 group-hover:bg-festive-red group-hover:text-white transition-all">
+                                <i class="fas fa-drum"></i>
+                            </div>
+                            <h4 class="font-bold text-sm md:text-base">Grand Dandiya</h4>
+                        </div>
+                        <div class="p-4 flex flex-col items-center group">
+                            <div class="w-20 h-20 rounded-full bg-festive-light border-2 border-pink-500 flex items-center justify-center text-3xl text-pink-500 mb-4 group-hover:scale-110 group-hover:bg-pink-500 group-hover:text-white transition-all">
+                                <i class="fas fa-camera-retro"></i>
+                            </div>
+                            <h4 class="font-bold text-sm md:text-base">Selfie Zone</h4>
+                        </div>
+                        <div class="p-4 flex flex-col items-center group">
+                            <div class="w-20 h-20 rounded-full bg-festive-light border-2 border-green-500 flex items-center justify-center text-3xl text-green-500 mb-4 group-hover:scale-110 group-hover:bg-green-500 group-hover:text-white transition-all">
+                                <i class="fas fa-hamburger"></i>
+                            </div>
+                            <h4 class="font-bold text-sm md:text-base">Food Stalls</h4>
+                        </div>
+                        <div class="p-4 flex flex-col items-center group col-span-2 md:col-span-1">
+                            <div class="w-20 h-20 rounded-full bg-festive-light border-2 border-festive-gold flex items-center justify-center text-3xl text-yellow-500 mb-4 group-hover:scale-110 group-hover:bg-festive-gold group-hover:text-white transition-all">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h4 class="font-bold text-sm md:text-base">Best Couple Prize</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pricing Section -->
+            <section class="py-16 px-4 bg-festive-light relative overflow-hidden">
+                <!-- Decorative backgrounds -->
+                <div class="absolute top-0 left-0 w-64 h-64 bg-festive-gold rounded-full mix-blend-multiply filter blur-3xl opacity-20 -translate-x-1/2 -translate-y-1/2"></div>
+                <div class="absolute bottom-0 right-0 w-64 h-64 bg-festive-red rounded-full mix-blend-multiply filter blur-3xl opacity-20 translate-x-1/2 translate-y-1/2"></div>
+                
+                <div class="max-w-5xl mx-auto relative z-10">
+                    <h2 class="text-4xl font-heading font-bold text-center text-festive-maroon mb-4">Entry Passes</h2>
+                    <p class="text-center text-gray-600 mb-12">Choose the perfect pass for you and your loved ones.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Kids Pass -->
+                        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-gray-100 hover:border-festive-orange hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="bg-gray-100 p-6 text-center">
+                                <h3 class="font-heading text-2xl font-bold text-gray-800">Kids</h3>
+                                <p class="text-sm text-gray-500 mt-1">Up to 12 yrs</p>
+                            </div>
+                            <div class="p-8 text-center">
+                                <p class="text-5xl font-black text-festive-orange mb-6">₹251</p>
+                                <ul class="text-gray-600 space-y-3 mb-8 text-sm">
+                                </ul>
+                                <button onclick="document.getElementById('booking').scrollIntoView()" class="w-full bg-festive-orange/10 text-festive-orange border-2 border-festive-orange py-2 rounded-full font-bold hover:bg-festive-orange hover:text-white transition-colors">Select Pass</button>
+                            </div>
+                        </div>
+
+                        <!-- Solo Pass (Featured) -->
+                        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border-2 border-festive-red relative transform scale-105 z-10">
+                            <div class="absolute top-0 right-0 bg-festive-gold text-festive-red text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
+                            <div class="bg-festive-red p-6 text-center text-white">
+                                <h3 class="font-heading text-2xl font-bold">Solo</h3>
+                                <p class="text-sm text-festive-light mt-1">13 yrs & above</p>
+                            </div>
+                            <div class="p-8 text-center">
+                                <p class="text-5xl font-black text-festive-red mb-6">₹399</p>
+                                <ul class="text-gray-600 space-y-3 mb-8 text-sm">
+                                </ul>
+                                <button onclick="document.getElementById('booking').scrollIntoView()" class="w-full bg-festive-red text-white py-3 rounded-full font-bold hover:bg-festive-maroon shadow-lg transition-colors">Select Pass</button>
+                            </div>
+                        </div>
+
+                        <!-- Couple Pass -->
+                        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-gray-100 hover:border-pink-500 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="bg-pink-50 p-6 text-center">
+                                <h3 class="font-heading text-2xl font-bold text-pink-700">Couple</h3>
+                                <p class="text-sm text-pink-500 mt-1">2 Persons</p>
+                            </div>
+                            <div class="p-8 text-center">
+                                <p class="text-5xl font-black text-pink-600 mb-6">₹699</p>
+                                <ul class="text-gray-600 space-y-3 mb-8 text-sm">
+                                </ul>
+                                <button onclick="document.getElementById('booking').scrollIntoView()" class="w-full bg-pink-50 text-pink-600 border-2 border-pink-400 py-2 rounded-full font-bold hover:bg-pink-500 hover:text-white transition-colors">Select Pass</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Booking Process Section -->
+            <section id="booking" class="py-20 px-4 bg-white border-t border-gray-200 scroll-mt-20">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-heading font-bold text-festive-red mb-4">Secure Your Spot</h2>
+                        <p class="text-lg text-gray-600">Follow these 2 simple steps to get your E-Pass</p>
+                    </div>
+
+                    <div class="bg-festive-light border border-festive-gold/40 rounded-2xl p-8 md:p-12 shadow-xl">
+                        <!-- Step 1 -->
+                        <div class="flex flex-col md:flex-row gap-8 items-center border-b border-gray-300 pb-10 mb-10">
+                            <div class="md:w-1/2">
+                                <div class="inline-block bg-festive-red text-white font-bold px-4 py-1 rounded-full text-sm mb-4">Step 1</div>
+                                <h3 class="text-2xl font-bold mb-4 text-gray-800">Make the Payment</h3>
+                                <p class="text-gray-600 mb-6">Scan this QR code using any UPI app (PhonePe, GPay, Paytm). Complete the payment according to your chosen pass and <strong>take a screenshot</strong>.</p>
+                                <div class="flex items-center gap-3 text-sm font-semibold text-gray-500">
+                                    <i class="fab fa-google-pay text-2xl text-blue-500"></i>
+                                    <i class="fas fa-rupee-sign text-2xl text-purple-600 border-2 border-purple-600 rounded-full w-8 h-8 flex items-center justify-center"></i>
+                                    <span>Accepting all UPI Apps</span>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 flex justify-center">
+                                <div class="bg-white p-4 rounded-xl shadow-md border-2 border-dashed border-festive-orange">
+                                    <!-- QR Code Placeholder -->
+                                    <img src="./QR RBR_.jpeg" alt="Payment QR Code" class="w-48 h-48 rounded object-cover">
+                                    <p class="mt-3 font-bold text-gray-800 text-center">Ms Swati Suman</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="md:w-1/2 flex justify-center order-2 md:order-1">
+                                <img src="./QR Form.jpeg" alt="Form Registration" class="w-64 rounded-lg mix-blend-multiply">
+                            </div>
+                            <div class="md:w-1/2 order-1 md:order-2">
+                                <div class="inline-block bg-festive-orange text-white font-bold px-4 py-1 rounded-full text-sm mb-4">Step 2</div>
+                                <h3 class="text-2xl font-bold mb-4 text-gray-800">Submit Your Details</h3>
+                                <p class="text-gray-600 mb-6">Click below to open our secure Google Form. Upload your payment screenshot and fill in attendee details to receive your E-Pass on WhatsApp/Email.</p>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSebStBkXQ1A4PeygoWAPQKxlpTgtJgt8G5dFfgXvVEYGp0aFQ/viewform?usp=sharing&ouid=101921006872307051210" target="_blank" class="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-blue-700 transition-colors shadow-lg w-full md:w-auto"> 
+                                    <i class="fab fa-wpforms"></i> Fill Registration Form
+                                </a>
+                                <p class="text-xs text-gray-400 mt-3">* Form opens in a new tab</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mini About RBR Pathshala -->
+            <section class="py-20 px-4 bg-festive-maroon text-white relative overflow-hidden">
+                <div class="max-w-6xl mx-auto relative z-10 flex flex-col lg:flex-row items-center gap-12">
+                    <div class="lg:w-1/2">
+                        <p class="text-festive-gold font-bold tracking-widest text-sm mb-2 uppercase">The Organizer</p>
+                        <h2 class="text-4xl md:text-5xl font-heading font-bold mb-6">About RBR Pathshala</h2>
+                        <p class="text-gray-300 mb-6 text-lg leading-relaxed">
+                            Established in 2016, RBR Pathshala is dedicated to the motto "Play • Learn • Succeed." We believe in keeping our traditions alive while fostering a happier, healthier, and more united society. This Dandiya Mahotsav is our initiative to bring the community together for a grand celebration of culture.
+                        </p>
+                        <a href="https://www.rbrpathshala.com/about" target="_blank" class="inline-flex items-center gap-2 bg-transparent border-2 border-festive-gold text-festive-gold px-6 py-3 rounded-full font-bold hover:bg-festive-gold hover:text-festive-maroon transition-all group">
+                            Click to know more RBR Pathshala
+                            <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                    </div>
+                    <div class="lg:w-1/2 grid grid-cols-2 gap-4">
+                        <img src="./pic.jpg" alt="RBR Pathshala Event 1" class="rounded-xl shadow-lg w-full h-64 object-cover transform translate-y-8">
+                        <img src="./pic 2.jpg" alt="RBR Pathshala Event 2" class="rounded-xl shadow-lg w-full h-64 object-cover">
+                    </div>
+                </div>
+            </section>
+
+        </div> <!-- End of Home View -->
+
+
+        <!-- ======================================================= -->
+        <!-- ABOUT RBR PATHSHALA VIEW (Hidden initially)             -->
+        <!-- ======================================================= -->
+        <div id="about-view" class="hidden fade-in bg-white pb-20">
+            
+            <!-- About Header -->
+            <div class="bg-festive-light pt-12 pb-20 px-4 border-b-4 border-festive-gold relative">
+                <div class="max-w-5xl mx-auto">
+                    <button onclick="switchView('home-view')" class="mb-8 text-festive-red hover:text-festive-orange font-bold flex items-center gap-2 transition-colors">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </button>
+                    <div class="text-center">
+                        <img src="https://placehold.co/200x200/8b0000/ffd700?text=RBR+Logo" alt="RBR Logo" class="w-32 h-32 mx-auto rounded-full shadow-lg border-4 border-white mb-6">
+                        <h1 class="text-5xl font-heading font-bold text-festive-maroon mb-4">RBR Pathshala</h1>
+                        <p class="text-xl text-gray-600 font-light max-w-2xl mx-auto">Play • Learn • Succeed. Empowering minds since 2016.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Founder Section -->
+            <div class="max-w-5xl mx-auto px-4 -mt-10 relative z-10">
+                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100 flex flex-col md:flex-row gap-10 items-center">
+                    <div class="w-48 h-48 md:w-64 md:h-64 flex-shrink-0">
+                        <img src="https://placehold.co/300x300/e2e8f0/64748b?text=Founder+Photo" alt="Founder" class="w-full h-full object-cover rounded-2xl shadow-md border-4 border-festive-light">
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-heading font-bold text-gray-800 mb-2">Message from the Founder</h2>
+                        <p class="text-festive-red font-semibold mb-4">Mr. John Doe (Placeholder)</p>
+                        <div class="text-gray-600 space-y-4 leading-relaxed">
+                            <p>“At RBR Pathshala, our vision has always been to create a holistic environment where education meets cultural values. We believe that learning extends beyond the four walls of a classroom.”</p>
+                            <p>“Events like the Dandiya Mahotsav are integral to our philosophy. They teach our students and community the importance of togetherness, tradition, and joyous celebration. We welcome you to be a part of our growing family.”</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="max-w-6xl mx-auto px-4 py-20">
+                <h2 class="text-3xl font-heading font-bold text-center text-festive-maroon mb-12">What People Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-festive-light p-8 rounded-xl relative shadow-sm border border-gray-200">
+                        <i class="fas fa-quote-left text-4xl text-festive-gold/30 absolute top-4 left-4"></i>
+                        <p class="text-gray-600 italic relative z-10 mt-4 mb-6">"RBR Pathshala has completely transformed how my child views learning. The cultural events are just the cherry on top!"</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold">S</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm">Sunita Sharma</h4>
+                                <p class="text-xs text-gray-500">Parent</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-festive-light p-8 rounded-xl relative shadow-sm border border-gray-200">
+                        <i class="fas fa-quote-left text-4xl text-festive-gold/30 absolute top-4 left-4"></i>
+                        <p class="text-gray-600 italic relative z-10 mt-4 mb-6">"The best institute in Dhanbad. They focus on overall development, not just academics. Highly recommended."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold">R</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm">Rajesh Kumar</h4>
+                                <p class="text-xs text-gray-500">Community Member</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="bg-festive-light p-8 rounded-xl relative shadow-sm border border-gray-200">
+                        <i class="fas fa-quote-left text-4xl text-festive-gold/30 absolute top-4 left-4"></i>
+                        <p class="text-gray-600 italic relative z-10 mt-4 mb-6">"Events organized by RBR are always top-notch. Can't wait for this year's Dandiya Mahotsav!"</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-white font-bold">A</div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-sm">Anjali Singh</h4>
+                                <p class="text-xs text-gray-500">Student Alumnus</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Gallery -->
+            <div class="max-w-6xl mx-auto px-4 pb-20">
+                <h2 class="text-3xl font-heading font-bold text-center text-festive-maroon mb-12">Glimpses of Joy</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="group cursor-pointer">
+                        <div class="overflow-hidden rounded-xl shadow-md mb-3">
+                            <img src="https://placehold.co/400x300/f59e0b/ffffff?text=Kids+Learning" alt="Kids Learning" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <p class="text-center text-sm font-semibold text-gray-700">Interactive Learning Sessions</p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <div class="overflow-hidden rounded-xl shadow-md mb-3">
+                            <img src="https://placehold.co/400x300/10b981/ffffff?text=Sports+Day" alt="Sports Day" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <p class="text-center text-sm font-semibold text-gray-700">Annual Sports Meet</p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <div class="overflow-hidden rounded-xl shadow-md mb-3">
+                            <img src="https://placehold.co/400x300/ef4444/ffffff?text=Art+Craft" alt="Art & Craft" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <p class="text-center text-sm font-semibold text-gray-700">Creative Art Workshops</p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <div class="overflow-hidden rounded-xl shadow-md mb-3">
+                            <img src="https://placehold.co/400x300/8b5cf6/ffffff?text=Past+Festivals" alt="Festival Celebration" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <p class="text-center text-sm font-semibold text-gray-700">Celebrating Traditions</p>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End of About View -->
+
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-festive-dark text-gray-300 py-12 border-t-4 border-festive-red">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Brand -->
+            <div class="text-center md:text-left">
+                <h3 class="text-2xl font-heading font-bold text-white mb-2">RBR Pathshala</h3>
+                <p class="text-sm text-gray-400 mb-4">Play • Learn • Succeed<br>Since 2016</p>
+                <p class="text-xs">Organizers of Dandiya Mahotsav Dhanbad.</p>
+            </div>
+            
+            <!-- Contacts -->
+            <div class="text-center">
+                <h4 class="text-lg font-bold text-white mb-4">Contact Us</h4>
+                <div class="space-y-2">
+                    <p class="flex items-center justify-center gap-2">
+                        <i class="fas fa-phone text-festive-gold"></i>
+                        7903450556
+                    </p>
+                    <p class="flex items-center justify-center gap-2">
+                        <i class="fas fa-phone text-festive-gold"></i>
+                        8409614446
+                    </p>
+                </div>
+            </div>
+
+            <!-- Socials -->
+            <div class="text-center md:text-right">
+                <h4 class="text-lg font-bold text-white mb-4">Follow Us</h4>
+                <div class="flex justify-center md:justify-end gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gradient-to-tr hover:from-yellow-400 hover:to-pink-600 hover:text-white transition-all">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 hover:text-white transition-all">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <p class="mt-4 text-sm">@rbrpathshala</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+            &copy; 2026 RBR Pathshala. All rights reserved. Let's keep our traditions alive.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- Single Page Application Routing ---
+        function switchView(viewId) {
+            // Hide all views
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('home-view').classList.remove('block');
+            
+            document.getElementById('about-view').classList.add('hidden');
+            document.getElementById('about-view').classList.remove('block');
+
+            // Show selected view
+            const selectedView = document.getElementById(viewId);
+            selectedView.classList.remove('hidden');
+            selectedView.classList.add('block');
+            
+            // Scroll to top automatically on view switch
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- Mobile Menu Toggle ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // --- Countdown Timer Logic ---
+        // Target date: October 8, 2026, 17:00:00 (5:00 PM)
+        const targetDate = new Date("Oct 8, 2026 17:00:00").getTime();
+
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+                return;
+            }
+
+            // Time calculations
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display with leading zeros
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+            
+        }, 1000);
+    </script>
+</body>
+</html>
